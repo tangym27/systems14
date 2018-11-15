@@ -1,6 +1,6 @@
 all: arg.c
 	gcc arg.c
 run:
-	./a.out "ls -a -l"
-clean: 
+	./a.out
+clean:
 	rm *.out
