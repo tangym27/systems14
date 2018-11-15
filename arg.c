@@ -10,6 +10,7 @@ char ** parse_args( char * line ){
   char * token;
   int i = 0;
   while(token){
+    // Seperate based on spaces between args
     token = strsep(&line, " ");
     args[i] = token;
     i++;
@@ -20,13 +21,25 @@ char ** parse_args( char * line ){
 // To test use this is the command line "ls -a -l"
 int main(int argc, char *argv[]){
   char* str = malloc(50);
-  str = argv[1];
-  printf("Looking into string: %s\n", str );
-  char ** arr= parse_args(str);
-  int i = 0;
-  while(arr[i]){
-      printf("arr[%d]: %s\n", i, arr[i]);
-      i++;
+  if(argc <=  1){
+	  printf("Enter a string to be parsed:\n");
+	  fgets(str,50,stdin);
   }
+  else{ str = argv[1];
+  }
+  
+  printf("Looking into string: %s\n", str);
+
+  char ** arr = parse_args(str);
+  int i =0;
+  while(arr[i]){
+	printf("arr[%d]: %s\n", i, arr[i]);
+	i++;
+    }
+
+  //arr[strlen(arr) - 1 ] = NULL;
+  
+  execvp(arr[0],arr);
+
   return 0;
-}
+  }
